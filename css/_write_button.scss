@@ -50,12 +50,21 @@
             .tabs span.timed {color: $white; -webkit-font-smoothing: subpixel-antialiased;}
             .tab-timed { display: block; }
             .tab-words { display: none; }
+            .tab-chars { display: none; }
             }
         &.words
             {
             .tabs span.words {color: $white; -webkit-font-smoothing: subpixel-antialiased;}
             .tab-timed { display: none; }
             .tab-words { display: block; }
+            .tab-chars { display: none; }
+            }
+        &.chars
+            {
+            .tabs span.words {color: $white; -webkit-font-smoothing: subpixel-antialiased;}
+            .tab-timed { display: none; }
+            .tab-words { display: none; }
+            .tab-chars { display: block; }
             }
         .radios
             {

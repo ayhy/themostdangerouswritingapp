@@ -3,16 +3,17 @@
 const email_regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 
 let $hardcore = $('#hardcore');
-
+let composing = false;
 let danger_zone = false;
 let danger_count = 0;
 let words = 0;
+let chars = 0;
 let time_since_stroke = 0;
-let composing = false;
 let $input = $('#input');
 let $progress = $('#progress');
 let progress = 0;
 let $wordcount = $('#wordcount');
+let $charcount = $('#charcount');
 let run = false;
 let tock = null;
 let start_time = 0;
@@ -68,7 +69,9 @@ let update_progress = function () {
 
 let update_stats = function () {
   words = $input.val().split(/\s+/).length;
+  chars = $input.val().replace(/\s+/,"").length;
   $wordcount.text(words + (words == 1 ? " word" : " words"));
+  $charcount.text(chars + (chars == 1 ? " character" : " characters"));
 };
 
 let die = function() {
@@ -105,7 +108,8 @@ let win = function() {
 
 let tick = function() {
   let duration = now() - start_time;
-  progress = (session_type == "timed" ? duration : words) / session_limit;
+  let target = session_type == "words" ? words : chars;
+  progress = (session_type == "timed" ? duration : target) / session_limit;
   time_since_stroke += 0.1;
 
   update_progress();
@@ -202,7 +206,7 @@ $input.on('scroll', function () {
 
 $input.on('compositionstart compositionend', function(){composing=!composing});
 $input.on('input', function(e){if(composing){stroke(e)}});
-$input.on('keydown', stroke);
+$input.on('keydown', function(e){if(!composing){stroke(e)}});
 
 let toggleFullScreen = function() {
   if (!document.fullscreenElement &&    // alternative standard method
