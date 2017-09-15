@@ -63,6 +63,7 @@
   
   <link href="https://fonts.googleapis.com/css?family=Lato:400,700,900|Merriweather" rel="stylesheet">
   <link rel="stylesheet" href="css/common.css" type="text/css">
+  <link rel="stylesheet" href="css/fontextension.css" type="text/css">
 </head>
 <body class="home">
 
@@ -130,7 +131,8 @@
 
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script>if (!window.jQuery) { document.write('<script src="js/min/jquery.js"><\/script>'); }</script>
-<script type="text/javascript" src="js/min/common.js"></script>
+<script type="text/javascript" src="js/min/FileSaver.js"></script>
+<script type="text/javascript" src="js/common.js"></script>
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -145,8 +147,24 @@
     if (localStorage.getItem("mdwa.returning") === "true") $("#die").addClass('returning');
 
     var limits = new RegExp("[?&]limit=([0-9]+)([a-z])[^&#]*").exec(window.location.href) || ["", "5", "m"];
+
     var hardcore_mode = new RegExp("[?&]hardcore=(true|false)").exec(window.location.href) || ["", "false"];
     hardcore_mode = hardcore_mode[1] === "true"
+    var font = new RegExp("[?&]font=([a-z])[^&#]*").exec(window.location.href) || navigator.language || navigator.userLanguage;
+    console.log(["font",font]);
+
+    var session_duration = parseInt(limits[1]);
+    var duration = 0;
+    var session_type = (function(e){switch(e){case"w": return "words"; case"c": return "characters"; default: return "timed"}})(limits[2]);
+    var session_limit = session_type === "timed" ? session_duration * 60 : session_duration;
+    var won = false;
+
+    switch(font){
+    	case "zh":$("#input").css({"font-family":"Merriweather, Source Han Serif Web TW"});break;
+    	case "ko":$("#input").css({"font-family":"Merriweather, Source Han Serif Web KR"});break;
+    	case "ja":$("#input").css({"font-family":"Merriweather, Source Han Serif Web JP"});break;
+    	case "th":$("#input").css({"font-family":"Merriweather, Noto Serif Thai"});break;
+    };
 
     var session_duration = parseInt(limits[1]);
     var duration = 0;

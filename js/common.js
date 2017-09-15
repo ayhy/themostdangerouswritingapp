@@ -4,8 +4,10 @@
     time_limits: [3, 5, 10, 20, 30, 60],
     word_limits: [75, 150, 250, 500, 1667],
  	char_limits: [200, 400, 700, 1500, 5000], 
+ 	extra_fonts: [["","Auto"],["ja","JPN"], ["zh","ZHO"], ["ko","KOR"],["th","THA"]],
     type: "timed",
     limit: 5,
+    font: "",
     hidden: false,
     hardcore: false
     };
@@ -23,7 +25,7 @@
       if (btn.hasClass("btn-small")) { $wrapper.addClass("small"); }
       btn.wrapAll($wrapper);
 
-let timed_radios = "", words_radios = "", chars_radios="";
+let timed_radios = "", words_radios = "", chars_radios="", font_radios="";
 
       for (let idx in settings.time_limits) {
         let checked = settings.type === 'timed' && settings.limit === settings.time_limits[idx] ? 'checked' : '';
@@ -35,11 +37,15 @@ let timed_radios = "", words_radios = "", chars_radios="";
         words_radios += `<input ${checked} class='select_time' id='radio${idx + settings.time_limits.length}' type='radio' name='time' value='${settings.word_limits[idx]}words' /><label for='radio${idx  + settings.time_limits.length}'>${String(settings.word_limits[idx]).replace("000", "k")}</label>\n`;
       }
 
-	for (let idx in settings.char_limits) {
-	let checked = settings.type === 'characters' && settings.limit === settings.char_limits[idx] ? 'checked' : '';
-	chars_radios += `<input ${checked} class='select_time' id='radio${idx + settings.time_limits.length + + settings.word_limits.length}' type='radio' name='time' value='${settings.char_limits[idx]}characters' /><label for='radio${idx + settings.time_limits.length + settings.word_limits.length}'>${String(settings.char_limits[idx]).replace("000", "k")}</label>\n`;
-	} 
+      for (let idx in settings.char_limits) {
+        let checked = settings.type === 'characters' && settings.limit === settings.char_limits[idx] ? 'checked' : '';
+      chars_radios += `<input ${checked} class='select_time' id='radio${idx + settings.time_limits.length + settings.word_limits.length}' type='radio' name='time' value='${settings.char_limits[idx]}characters' /><label for='radio${idx + settings.time_limits.length + settings.word_limits.length}'>${String(settings.char_limits[idx]).replace("000", "k")}</label>\n`;
+      }
 
+      for (let idx in settings.extra_fonts) {
+        let checked = settings.font === settings.extra_fonts[idx][0] ? 'checked' : '';
+      font_radios += `<input ${checked} class='select_font' id='radio${idx + settings.time_limits.length + settings.word_limits.length + settings.char_limits.length}' type='radio' name='font' value='${settings.extra_fonts[idx][0]}' /><label for='radio${idx + settings.time_limits.length + settings.word_limits.length + settings.char_limits.length}'>${String(settings.extra_fonts[idx][1])}</label>\n`;
+      }
 	      let $chooser = $(`
       <div class="session_chooser ${settings.hidden ? 'hidden' : ''}">
             <div class="full ${settings.type}" style="display: none;">
@@ -61,10 +67,14 @@ let timed_radios = "", words_radios = "", chars_radios="";
                         ${chars_radios}
                     </div>
                 </div> 
-		<div class="tab-hardcore">
+				<div class="tab-hardcore">
                   <input type="checkbox" name="hardcore-check" id="hardcore-check" /><label for="hardcore-check">Hardcore mode</label>
                 </div>
-            </div>
+				<div class="tab-extrafonts">
+                  <span class="font"> Extra font:</span> ${font_radios}
+                </div>
+             </div>
+            			
             <div class="compact">
                 Session length: <span class="choice">${settings.limit} ${settings.type == 'timed' ? 'minutes' : settings.type}</span> <i class="edit icon-pencil"></i>
             </div>
@@ -75,9 +85,10 @@ let timed_radios = "", words_radios = "", chars_radios="";
         btn.on("mouseenter", function() {$chooser.fadeIn();});
       }
       let set_url = function() {
-        let limit = $chooser.find("input[type=radio]:checked").val()
+        let limit = $chooser.find("input[class=select_time]:checked").val()
         let hardcore = $chooser.find("#hardcore-check")[0].checked ? "&hardcore=true" : "";
-        btn.attr('href', `${url}?limit=${limit}${hardcore}`)
+        let font = $chooser.find("input[class=select_font]:checked").val() == "" ? "" : "&font=" + $chooser.find("input[class=select_font]:checked").val() ;
+	        btn.attr('href', `${url}?limit=${limit}${hardcore}${font}`)
       }
       $chooser.find("input").on('change', set_url);
       $chooser.find(".tabs .words").bind('click', function () {

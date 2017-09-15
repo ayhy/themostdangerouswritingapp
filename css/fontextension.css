@@ -1,0 +1,28 @@
+﻿	@font-face {
+		font-family: "Source Han Serif Web JP";
+		font-weight: 400;
+		unicode-range: U+3000-303F,U+3040-309F,U+30A0-30FF,U+319?,U+31F?,U+3220-32FF,U+33??,U+FE1?,U+FE3?,U+FF??,U+4E00—9FFF;
+		src: url("fonts/SourceHanSerifJP-Medium.woff2") format("woff2"),
+		     url("fonts/SourceHanSerifJP-Medium.woff") format("woff"),
+		     url("fonts/SourceHanSerifJP-Medium.otf") format("opentype"),
+		     url("https://jdh8.github.io/source-han-serif/SourceHanSerifJP-Medium.woff2") format("woff2"),
+		     url("https://jdh8.github.io/source-han-serif/SourceHanSerifJP-Medium.woff") format("woff"),
+		     url("https://jdh8.github.io/source-han-serif/SourceHanSerifJP-Medium.otf") format("opentype");
+	}
+
+	@font-face {
+		font-family: "Source Han Serif Web TW";
+		font-weight: 400;
+		unicode-range: U+2E80-2EFF,U+2F00-2FDF,U+2FF?,U+3100-312F,U+31A0-31BF,U+31C0-31EF,U+3400-380F,U+A700—A71F;
+		src: url("fonts/SourceHanSerifTW-Medium.woff2") format("woff2"),
+		     url("fonts/SourceHanSerifTW-Medium.woff") format("woff"),
+		     url("fonts/SourceHanSerifTW-Medium.otf") format("opentype"),
+		     url("https://jdh8.github.io/source-han-serif/SourceHanSerifTW-Medium.woff2") format("woff2"),
+		     url("https://jdh8.github.io/source-han-serif/SourceHanSerifTW-Medium.woff") format("woff"),
+		     url("https://jdh8.github.io/source-han-serif/SourceHanSerifTW-Medium.otf") format("opentype");
+	}
+	@font-face {
+		font-family: "Noto Serif Thai";
+		font-weight: 400;
+		src: url("fonts/NotoSerifThai-Regular.ttf") format('truetype');
+	}
