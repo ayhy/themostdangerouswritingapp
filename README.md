@@ -31,3 +31,5 @@
 * [PopSugar](https://me.popsugar.com/technology/Why-Most-Dangerous-Writing-App-Make-You-More-Productive-40420571):
 
   > Spending Time On This App Will Actually Make You More Productive
+
+Note: This is forked from original MDWA, extended for East-Asian writing system (mainly CJK)
