@@ -4,7 +4,7 @@
     time_limits: [3, 5, 10, 20, 30, 60],
     word_limits: [75, 150, 250, 500, 1667],
  	char_limits: [200, 400, 700, 1500, 5000], 
- 	extra_fonts: [["","Auto"],["ja","JPN"], ["zh","ZHO"], ["ko","KOR"],["th","THA"]],
+ 	extra_fonts: [["","Auto"],["ja","日"], ["zh","中"], ["ko","韓"],["th","ไทย"]],
     type: "timed",
     limit: 5,
     font: "",
@@ -71,7 +71,7 @@ let timed_radios = "", words_radios = "", chars_radios="", font_radios="";
                   <input type="checkbox" name="hardcore-check" id="hardcore-check" /><label for="hardcore-check">Hardcore mode</label>
                 </div>
 				<div class="tab-extrafonts">
-                  <span class="font"> Extra font:</span> ${font_radios}
+                <span class="font"> Font:</span> ${font_radios}
                 </div>
              </div>
             			

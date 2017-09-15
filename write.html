@@ -150,16 +150,20 @@
 
     var hardcore_mode = new RegExp("[?&]hardcore=(true|false)").exec(window.location.href) || ["", "false"];
     hardcore_mode = hardcore_mode[1] === "true"
-    var font = new RegExp("[?&]font=([a-z])[^&#]*").exec(window.location.href) || navigator.language || navigator.userLanguage;
-    console.log(["font",font]);
+    var font = new RegExp("[?&]font=([a-z]{2})").exec(window.location.href) || ["",navigator.language || navigator.userLanguage];
 
+    console.log(font[0]);
+    console.log(font[1]);
+    console.log(font[2]);
+    console.log(font[3]);
+    console.log(font.length);
     var session_duration = parseInt(limits[1]);
     var duration = 0;
     var session_type = (function(e){switch(e){case"w": return "words"; case"c": return "characters"; default: return "timed"}})(limits[2]);
     var session_limit = session_type === "timed" ? session_duration * 60 : session_duration;
     var won = false;
 
-    switch(font){
+    switch(font[1]){
     	case "zh":$("#input").css({"font-family":"Merriweather, Source Han Serif Web TW"});break;
     	case "ko":$("#input").css({"font-family":"Merriweather, Source Han Serif Web KR"});break;
     	case "ja":$("#input").css({"font-family":"Merriweather, Source Han Serif Web JP"});break;
@@ -172,7 +176,6 @@
     var session_limit = session_type === "timed" ? session_duration * 60 : session_duration;
     console.log(window.location.href);
 
-    console.log(session_type);
     var won = false;
 
     $(function () {
