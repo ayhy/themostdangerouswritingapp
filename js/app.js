@@ -68,8 +68,8 @@ let update_progress = function () {
 }
 
 let update_stats = function () {
-  words = $input.val().split(/\s+/).length;
-  chars = $input.val().replace(/\s+/,"").length;
+  words = $input.val().trim().split(/\s+/).length;
+  chars = $input.val().trim().replace(/\s+/,"").length;
   $wordcount.text(words + (words == 1 ? " word" : " words"));
   $charcount.text(chars + (chars == 1 ? " character" : " characters"));
 };
