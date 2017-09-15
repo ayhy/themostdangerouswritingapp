@@ -32,4 +32,4 @@
 
   > Spending Time On This App Will Actually Make You More Productive
 
-Note: This is forked from original MDWA, extended for East-Asian writing system (mainly CJK)
+*Note: This is forked from original MDWA, extended for East-Asian writing system (mainly CJK)*
